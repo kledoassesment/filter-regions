@@ -4,14 +4,12 @@ import {
   useNavigate,
 } from 'react-router-dom';
 
-// ─── Loader ───────────────────────────────────────────────────────────────────
 export async function loader() {
   const res = await fetch('/data/indonesia_regions.json');
   if (!res.ok) throw new Error('Failed to load region data');
   return res.json();
 }
 
-// ─── Icons ────────────────────────────────────────────────────────────────────
 function ProvinceIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -52,7 +50,6 @@ function ArrowDownIcon() {
   );
 }
 
-// ─── Combobox ─────────────────────────────────────────────────────────────────
 function Combobox({ name, label, icon, options, value, onChange, disabled, placeholder }) {
   return (
     <div className="flex flex-col gap-1.5">
@@ -96,7 +93,6 @@ function Combobox({ name, label, icon, options, value, onChange, disabled, place
   );
 }
 
-// ─── Main Component ───────────────────────────────────────────────────────────
 export default function FilterPage() {
   const { provinces, regencies, districts } = useLoaderData();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -131,7 +127,6 @@ export default function FilterPage() {
   };
   const handleReset = () => setSearchParams({});
 
-  // Breadcrumb parts
   const crumbs = [
     { label: 'Indonesia', active: false },
     selectedProvince ? { label: selectedProvince.name, active: !selectedRegency } : null,
@@ -142,10 +137,10 @@ export default function FilterPage() {
   return (
     <div className="flex min-h-screen bg-slate-50 font-sans">
 
-      {/* ── Sidebar ─────────────────────────────────────────────────────── */}
+
       <aside className="w-72 min-h-screen bg-white border-r border-slate-100 flex flex-col shadow-sm">
 
-        {/* Logo / Brand */}
+
         <div className="flex items-center gap-3 px-6 py-5 border-b border-slate-100">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shadow-md">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -156,7 +151,7 @@ export default function FilterPage() {
           <span className="font-bold text-slate-800 tracking-tight text-base">Frontend Assessment</span>
         </div>
 
-        {/* Filters */}
+
         <div className="flex flex-col gap-6 px-6 pt-8 flex-1">
           <p className="text-xs font-semibold tracking-widest text-slate-400 uppercase">Filter Wilayah</p>
 
@@ -194,7 +189,7 @@ export default function FilterPage() {
           />
         </div>
 
-        {/* Reset button */}
+
         <div className="px-6 pb-8 pt-6">
           <button
             onClick={handleReset}
@@ -206,10 +201,10 @@ export default function FilterPage() {
         </div>
       </aside>
 
-      {/* ── Main Content ────────────────────────────────────────────────── */}
+
       <div className="flex flex-col flex-1 overflow-hidden">
 
-        {/* Breadcrumb */}
+
         <header className="bg-white border-b border-slate-100 px-8 py-4 shadow-sm">
           <nav className="breadcrumb flex items-center gap-2 text-sm">
             {crumbs.map((crumb, i) => (
@@ -230,7 +225,7 @@ export default function FilterPage() {
           </nav>
         </header>
 
-        {/* Content */}
+
         <main className="flex-1 flex items-center justify-center bg-slate-50">
           {!selectedProvince ? (
             <div className="text-center text-slate-300 select-none">
@@ -244,7 +239,7 @@ export default function FilterPage() {
           ) : (
             <div className="flex flex-col items-center gap-4 w-full max-w-lg px-8 py-12">
 
-              {/* Province */}
+
               <div className="text-center">
                 <p className="text-xs font-bold tracking-[0.2em] text-blue-400 uppercase mb-2">Provinsi</p>
                 <h1 className="text-5xl font-black text-slate-900 tracking-tight leading-none">
@@ -256,7 +251,7 @@ export default function FilterPage() {
                 <>
                   <div className="text-slate-300 my-1"><ArrowDownIcon /></div>
 
-                  {/* Regency */}
+
                   <div className="text-center">
                     <p className="text-xs font-bold tracking-[0.2em] text-blue-400 uppercase mb-2">Kota / Kabupaten</p>
                     <h2 className="text-5xl font-black text-slate-900 tracking-tight leading-none">
@@ -270,7 +265,7 @@ export default function FilterPage() {
                 <>
                   <div className="text-slate-300 my-1"><ArrowDownIcon /></div>
 
-                  {/* District */}
+
                   <div className="text-center">
                     <p className="text-xs font-bold tracking-[0.2em] text-blue-400 uppercase mb-2">Kecamatan</p>
                     <h3 className="text-5xl font-black text-slate-900 tracking-tight leading-none">
